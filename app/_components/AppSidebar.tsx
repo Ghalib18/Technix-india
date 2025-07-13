@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { BookType, Calendar, ChartNoAxesColumn, GalleryThumbnails, Gauge, Home, ImageIcon, Inbox, Lightbulb, Search, Settings, SettingsIcon, User2 } from "lucide-react"
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
@@ -22,24 +22,45 @@ const items = [
         icon: Home,
     },
     {
-        title: "Inbox",
+        title: "Thumbnail Generator",
         url: "#",
-        icon: Inbox,
+        icon: ImageIcon,
     },
     {
-        title: "Calendar",
+        title: "Thumbnail Search",
         url: "#",
-        icon: Calendar,
+        icon: GalleryThumbnails,
     },
     {
-        title: "Search",
+        title: "Keywords",
         url: "#",
-        icon: Search,
+        icon: BookType,
     },
     {
-        title: "Settings",
+        title: "Optimize",
         url: "#",
-        icon: Settings,
+        icon: ChartNoAxesColumn,
+    },
+    {
+        title: "Outlier",
+        url: "#",
+        icon: Gauge,
+    },
+    {
+        title: "AI Content Generator",
+        url: "#",
+        icon: Lightbulb,
+    },
+    {
+        title: "Billing",
+        url: "#",
+        icon: SettingsIcon,
+    },
+    
+    {
+        title: "Profile",
+        url: "#",
+        icon: User2,
     },
 ]
 
@@ -48,17 +69,22 @@ export function AppSidebar() {
     return (
         <Sidebar>
             <SidebarHeader>
-                <div className='p-4'>
-                    <Image src={'./logo.svg'} alt='logo' width={100} height={100}
-                        className='w-full h-full' />
-                    <h2 className='text-sm text-gray-400 text-center'>Build Awesome</h2>
-                </div>
+               <div className="p-4 flex flex-col items-center justify-start">
+  <Image
+    src="/LOGO.png"
+    alt="logo"
+    width={100}
+    height={100}
+    className="block mb-2"
+  />
+  <h2 className="text-sm text-gray-400">Build Awesome</h2>
+</div>
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
 
                     <SidebarGroupContent>
-                        <SidebarMenu className='mt-5'>
+                        <SidebarMenu >
                             {items.map((item, index) => (
                                 // <SidebarMenuItem key={item.title} className='p-2'>
                                 //     <SidebarMenuButton asChild className=''>
