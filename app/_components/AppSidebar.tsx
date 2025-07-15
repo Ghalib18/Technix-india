@@ -14,7 +14,6 @@ import {
 import { BookType, Calendar, ChartNoAxesColumn, GalleryThumbnails, Gauge, Home, ImageIcon, Inbox, Lightbulb, Search, Settings, SettingsIcon, User2 } from "lucide-react"
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-// here we use the shadcn components to implement the sidebar in our application
 const items = [
     {
         title: "Home",
