@@ -2,21 +2,16 @@
 
 import styles from './page.module.css';
 import dynamic from 'next/dynamic';
-import { useState, useRef, Suspense } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
-// Dynamically import Clerk components to improve initial load
-const SignUp = dynamic(
-  () => import('@clerk/nextjs').then((mod) => mod.SignUp),
-  { ssr: false }
-);
+// Dynamically import Clerk's SignIn to leverage built-in toggle functionality
 const SignIn = dynamic(
   () => import('@clerk/nextjs').then((mod) => mod.SignIn),
   { ssr: false }
 );
 
 export default function AuthPage() {
-  const [isSignUp, setIsSignUp] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -63,7 +58,7 @@ export default function AuthPage() {
               </button>
             </div>
 
-            {/* Feature Cards below video */}
+            {/* Feature Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
               <div className="flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
                 <img src="/thumbnail.svg" alt="Thumbnail Generator" className="w-10 h-10 mb-2" />
@@ -96,20 +91,11 @@ export default function AuthPage() {
             />
           </div>
 
-          {/* Clerk Auth Forms */}
-          <div className="w-full max-w-md space-y-6">
+          {/* Clerk Auth Form */}
+          <div className="w-full max-w-md">
             <Suspense fallback={<div className="text-center text-gray-500">Loading...</div>}>
-              {isSignUp ? <SignUp afterSignUpUrl="/dashboard" /> : <SignIn afterSignInUrl="/dashboard" />}
+              <SignIn afterSignInUrl="/dashboard" />
             </Suspense>
-
-            <div className="text-center">
-              <button
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-sm font-medium text-purple-600 hover:underline"
-              >
-                {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-              </button>
-            </div>
           </div>
         </div>
       </div>
