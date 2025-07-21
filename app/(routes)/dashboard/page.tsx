@@ -8,6 +8,7 @@ function Dashboard() {
          
         <div>
             {/*Welcome Banner */}
+            <UserButton/>
             <WelcomeBanner/>
             {/*Feature list*/}
             <FeatureList/>
