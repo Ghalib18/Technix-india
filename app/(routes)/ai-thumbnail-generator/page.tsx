@@ -1,7 +1,31 @@
-import { ArrowUp, ImagePlus, User } from 'lucide-react'
-import React from 'react'
+"use client"
+import { ArrowUp, ImagePlus, User, X } from 'lucide-react'
+import Image from 'next/image';
+import React, { useState } from 'react'
 
 function AiThumbnailGenerator() {
+const [userInput ,setUserInpute] = useState<string>('');
+const [refernanceImage, setRefernanceImage] = useState<File | null>(null);
+const [faceImage, setFaceImage] = useState<File | null>(null);
+const [refernanceImagePreview, setRefernanceImagePreview] = useState<string | undefined>();
+const [faceImagePreview, setfaceImagePreview] = useState<string | undefined>();
+
+
+// this is function which is used to handle whenever there is a change in the file input fields...
+ const OnHandleFileChange=(field:string,e:any)=>{
+    const selectedFile = e.target.files?.[0];
+  if (!selectedFile) return;
+
+  if(field=='refernanceImage'){
+    setRefernanceImage(selectedFile);
+    setRefernanceImagePreview(URL.createObjectURL(selectedFile));
+  }
+  else{
+      setFaceImage(selectedFile);
+      setfaceImagePreview(URL.createObjectURL(selectedFile));
+  }
+ }
+
   return (
     <div>
         <div className='px-10 md:px:20 lg:px-40'>
@@ -14,22 +38,39 @@ function AiThumbnailGenerator() {
       </div>
 
       <div className='flex  gap-5 items-center p-3 border rounded-xl mt-10 bg-secondary'>
-        <textarea placeholder='Enter your youtube video title or description' className='w-full outline-none bg-secondary'/>
+        <textarea placeholder='Enter your youtube video title or description' className='w-full outline-none bg-secondary'
+        onChange={(e)=>setUserInpute(e.target.value)}/>
         <div className ='p-3 bg-gradient-to-t from-red-500 to-orange-500 rounded-full'>
             <ArrowUp/>
         </div>
       </div>
       <div className='flex gap-5 mt-10'>
-        <div className='p-4 w-full border rounded-xl bg-secondary flex gap-2 items-center justify-center hover:scale-105 transition-all'>
+        <label htmlFor='refernanceImageUpload' className='w-full'>
+        {!refernanceImagePreview?<div className='p-4 w-full border rounded-xl bg-secondary flex gap-2 items-center justify-center hover:scale-105 transition-all'>
             <ImagePlus/>
             <h2>Referance Image</h2>
 
-        </div>
-        <div className='p-4 w-full border rounded-xl bg-secondary flex gap-2 items-center justify-center hover:scale-105 transition-all'>
+        </div>:
+        <div className='relative'>
+          <X className='absolute' onClick={()=> setRefernanceImagePreview(undefined)}/>
+        <Image src={refernanceImagePreview} alt='refernance image' width={100} height={100} className='w-70 w-70 object-cover rounded'/>
+        </div>}
+        </label>
+        <input type='file' id='refernanceImageUpload' className='hidden'
+        onChange={(e)=>OnHandleFileChange('refernanceImage',e)}/>
+        <label htmlFor='faceImageUpload' className='w-full'>
+        {!faceImagePreview?<div className='p-4 w-full border rounded-xl bg-secondary flex gap-2 items-center justify-center hover:scale-105 transition-all'>
             <User/>
             <h2>Referance Image</h2>
 
-        </div>
+        </div>:
+        <div className='relative'>
+          <X className='absolute' onClick={()=> setfaceImagePreview(undefined)}/>
+        <Image src={faceImagePreview} alt='refernance image' width={100} height={100} className='w-70 w-70 object-cover rounded'/>
+        </div>}
+        </label>
+        <input type='file' id='faceImageUpload' className='hidden' 
+        onChange={(e)=>OnHandleFileChange('faceImage',e)}/>
       </div>
 
       </div>
