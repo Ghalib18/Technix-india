@@ -8,6 +8,7 @@ function Dashboard() {
          
         <div>
             {/*Welcome Banner */}
+           {/*Added this for temporary use so that we can logout esaily */}
             <UserButton/>
             <WelcomeBanner/>
             {/*Feature list*/}
