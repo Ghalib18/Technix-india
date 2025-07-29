@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios';
 import { ArrowUp, ImagePlus, User, X } from 'lucide-react'
 import Image from 'next/image';
 import React, { useState } from 'react'
@@ -25,6 +26,18 @@ const [faceImagePreview, setfaceImagePreview] = useState<string | undefined>();
       setfaceImagePreview(URL.createObjectURL(selectedFile));
   }
  }
+ const OnSubmit=async()=>{
+  const formData= new FormData();
+  userInput&& formData.append('userInput',userInput);
+  refernanceImage&& formData.append('refImage',refernanceImage);
+  faceImage&& formData.append('faceImage',faceImage);
+
+  // Post API call
+
+  const result=await axios.post('/api/generate-thumbnail',formData)
+  console.log(result.data);
+
+ }
 
   return (
     <div>
@@ -40,7 +53,8 @@ const [faceImagePreview, setfaceImagePreview] = useState<string | undefined>();
       <div className='flex  gap-5 items-center p-3 border rounded-xl mt-10 bg-secondary'>
         <textarea placeholder='Enter your youtube video title or description' className='w-full outline-none bg-secondary'
         onChange={(e)=>setUserInpute(e.target.value)}/>
-        <div className ='p-3 bg-gradient-to-t from-red-500 to-orange-500 rounded-full'>
+        <div className ='p-3 bg-gradient-to-t from-red-500 to-orange-500 rounded-full cursor-pointer'
+        onClick={OnSubmit}>
             <ArrowUp/>
         </div>
       </div>
@@ -61,7 +75,7 @@ const [faceImagePreview, setfaceImagePreview] = useState<string | undefined>();
         <label htmlFor='faceImageUpload' className='w-full'>
         {!faceImagePreview?<div className='p-4 w-full border rounded-xl bg-secondary flex gap-2 items-center justify-center hover:scale-105 transition-all'>
             <User/>
-            <h2>Referance Image</h2>
+            <h2>Include Face</h2>
 
         </div>:
         <div className='relative'>
