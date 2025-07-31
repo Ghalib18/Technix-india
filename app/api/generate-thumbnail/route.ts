@@ -17,6 +17,8 @@ export async function Post (req:NextRequest){
     }
 }
 
+// this is used to get the information of the image so that we can display it or store in some where that can be used later...
+
 const getFileBufferData=async(file:File)=>{
     const bytes=await file.arrayBuffer();
     const buffer=Buffer.from(bytes);
