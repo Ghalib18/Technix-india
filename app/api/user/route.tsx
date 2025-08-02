@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/configs/db";
 import { usersTable } from "@/configs/schema";
 import { currentUser } from "@clerk/nextjs/server";
+// this is the backend logic for auth....
 
 export async function POST(req: NextRequest) {
     try {
