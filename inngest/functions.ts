@@ -14,15 +14,15 @@ export const GenerateAiThumbnail=inngest.createFunction(
   {event : 'ai/generate-thumbnail'},
   async ({event,step})=>{
     const {userEmail ,refImage ,faceImage ,userInput}=await event.data;
-    // Upload image to cloud/Imagekit
+    // Upload image to cloud/Imagekit this is the 1 step
 
-    // Generate AI prompt from AI model
+    // Generate AI prompt from AI model this is second step
 
-    // Generate AI image
+    // Generate AI image this is third step
 
-    //  Save Image to cloud
+    //  Save Image to cloud this is four step
 
-    // Save Record to the database to the datebase
+    // Save Record to the database to the datebase this is fifthe step
     return userEmail;
   }
 )
