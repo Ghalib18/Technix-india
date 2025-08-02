@@ -1,5 +1,6 @@
+import { inngest } from "@/inngest/client";
 import { currentUser } from "@clerk/nextjs/server";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function Post (req:NextRequest){
     const formData =await req.formData();
@@ -15,6 +16,12 @@ export async function Post (req:NextRequest){
         userEmail:user?.primaryEmailAddress?.emailAddress
 
     }
+    
+    const result= await inngest.send({
+        name:"ai/generate-thumbnail",
+        data:inputData
+    });
+    return NextResponse.json({result});
 }
 
 // this is used to get the information of the image so that we can display it or store in some where that can be used later...
